@@ -1,22 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subject Marks and GPA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: rgb(255, 255, 255);
-            color: rgb(0, 0, 0);
+            background-color: #293f53;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            width: 300px;
-            margin: 0 auto;
-            border-color: ;
+            max-width: 300px;
+            width: 100%;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -27,8 +36,12 @@
             align-self: center;
         }
         .grid input {
-            padding: 5px;
-            font-size: 14px;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .grid button {
             grid-column: span 2;
@@ -38,6 +51,7 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
+            border-radius: 5px;
         }
         .grid button:hover {
             background-color: #0e58c7;
@@ -75,7 +89,6 @@
             <button type="button" onclick="calculateGPA()">Submit</button>
         </div>
         <div class="table-container">
-            <h2>Subjects Marks and GPA</h2>
             <table>
                 <thead>
                     <tr>
@@ -105,29 +118,34 @@
             <h3>Overall GPA: <span id="gpa"></span></h3>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function calculateGPA() {
-            // Get the marks from the input fields
             let mark1 = parseInt(document.getElementById('subject1').value);
             let mark2 = parseInt(document.getElementById('subject2').value);
             let mark3 = parseInt(document.getElementById('subject3').value);
             let mark4 = parseInt(document.getElementById('subject4').value);
 
-            // Calculate the GPA (simple average for this example)
             let gpa = ((mark1 + mark2 + mark3 + mark4) / 4).toFixed(2);
 
-            // Set the marks and GPA in the table
             document.getElementById('mark1').textContent = mark1;
             document.getElementById('mark2').textContent = mark2;
             document.getElementById('mark3').textContent = mark3;
             document.getElementById('mark4').textContent = mark4;
             document.getElementById('gpa').textContent = gpa;
 
-            // Hide the grid and the initial heading, show the table container
             document.querySelector('.grid').style.display = 'none';
-            document.getElementById('grid-heading').style.display = 'none';
             document.querySelector('.table-container').style.display = 'block';
+
+            Swal.fire({
+                title: `Your GPA is ${gpa}`,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInUp animate__faster'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutDown animate__faster'
+                }
+            });
         }
     </script>
 </body>
